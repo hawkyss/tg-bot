@@ -8,5 +8,11 @@ module.exports = new Sequelize(
       host: 'ec2-54-228-32-29.eu-west-1.compute.amazonaws.com', 
       port: 5432,
       dialect: 'postgres',
+      dialectOptions: {
+         ssl: {
+           require: true, // This will help you. But you will see nwe error
+           rejectUnauthorized: false // This line will fix new error
+         }
+       }
    }
 )

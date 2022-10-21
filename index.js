@@ -3,8 +3,8 @@ require('dotenv').config();
 const { Keyboard, Key } = require('telegram-keyboard')
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const sequelize = require('./database')
-const UserModels = require('./userModels')
-const OrderModels = require('./orderModels')
+const UserModel = require('./userModels')
+const OrderModel = require('./orderModels')
 bot.use(session())
 
 const mainKeyboard = Keyboard.make([
@@ -14,6 +14,7 @@ const mainKeyboard = Keyboard.make([
 
 bot.start(async (ctx) => {
    try {
+      // await sequelize.drop();
       await sequelize.authenticate();
       await sequelize.sync();
    } catch (e) {
@@ -25,10 +26,22 @@ bot.start(async (ctx) => {
 
 const stepFormAccept = new Composer()
 stepFormAccept.on('text', async (ctx) => {
+   const order = await OrderModel.findOne({ where: {chatId: '' + ctx.scene.session.state.chatId} })
+   order.status = 'accepted'
+   try {
+      await UserModel.create({
+         chatId: ctx.scene.session.state.chatId,
+         username: '' + ctx.scene.session.state.username,
+         workId: '' + ctx.update.message.text,
+      })
+   } catch (e) {
+      console.log('Order db error ' + e)
+   }
+
    await ctx.telegram.sendMessage(ctx.scene.session.state.chatId, `
 ✅ Твоя заявка принята!
 
-🔗 Твоя ссылка для ворка:
+🔗 Твой айди для ворка:
 ${ctx.update.message.text}
 
 Удачного улова! 💛
@@ -67,7 +80,7 @@ stepEnd.on('text', async (ctx) => {
    ctx.session.chatId = ctx.update.message.chat.id
 
    try {
-      await OrderModels.create({
+      await OrderModel.create({
          chatId: ctx.session.userId,
          username: '@' + ctx.update.message.from.username,
          status: 'waiting',
@@ -104,27 +117,42 @@ bot.action(/acceptForm (.+)/, async (ctx) => {
    let params = ctx.match[1]
    const [chatId, username] = params.split(' ')
    await ctx.scene.enter('sceneAcceptForm', {chatId, username})
-   await ctx.reply('🔗 Ссылка для воркера:')
+   await ctx.reply('🔗 Айди для воркера:')
  })
 
  bot.action(/deniedForm (.+)/, async (ctx) => {
    let params = ctx.match[1]
    const [chatId, username] = params.split(' ')
+   const order = await OrderModel.findOne({ where: {chatId: '' + chatId} })
+   order.status = 'declined'
    await ctx.reply(`❌ Заявка пользователя ${username} - отклонена`)
    await ctx.telegram.sendMessage(chatId, '❌ К сожалению, ваша заявка была отклонена(', {disable_web_page_preview: true})
  })
 
 
 bot.on('text', async ctx => {
-   console.log(ctx.update)
+   // console.log(ctx.update)
    if (ctx.update.message.text === '✏️ Подать заявку') {
-      const order = await OrderModels.findOne({
-         where: {
-            chatId: ctx.update.message.chat.id
+      console.log(ctx.update.message.chat.id)
+      const order = await OrderModel.findOne({ where: {chatId: '' + ctx.update.message.chat.id} })
+      if (order) {
+
+         if (order.status === 'waiting') {
+            ctx.reply('Вы уже подали заявку, ожидайте 🕗')
          }
-      })
-      console.log('username ', order.username)
-      ctx.scene.enter('sceneWizard')
+
+         if (order.status === 'declined') {
+            ctx.reply('❌ Простите, но Вам отказали')
+         }
+
+         if (order.status === 'accepted') {
+            ctx.reply('✔️ Вы уже состоите в тиме')
+         }
+
+      } else {
+         ctx.scene.enter('sceneWizard')
+      }
+      
    }
 
    if (ctx.update.message.text === '💬 Обратная связь') {
