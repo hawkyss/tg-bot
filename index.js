@@ -3,6 +3,8 @@ require('dotenv').config();
 const { Keyboard, Key } = require('telegram-keyboard')
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const sequelize = require('./database')
+const UserModels = require('./userModels')
+const OrderModels = require('./orderModels')
 bot.use(session())
 
 const mainKeyboard = Keyboard.make([
@@ -63,6 +65,16 @@ stepEnd.on('text', async (ctx) => {
    ctx.session.username = '@' + ctx.update.message.from.username 
    ctx.session.userId = ctx.update.message.from.id 
    ctx.session.chatId = ctx.update.message.chat.id
+
+   try {
+      await OrderModels.create({
+         chatId: ctx.session.userId,
+         username: '@' + ctx.update.message.from.username,
+         status: 'waiting',
+      })
+   } catch (e) {
+      console.log('Order db error ' + e)
+   }
 
    await ctx.reply('Спасибо. Твоя заявка принята, ожидай 🕗', mainKeyboard)
    const formAdmin = Keyboard.make([
