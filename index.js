@@ -119,7 +119,7 @@ bot.on('text', async ctx => {
    console.log(ctx.update)
    if (ctx.update.message.text === '✏️ Подать заявку') {
        const order = await OrderModels.findOne({chatId: ctx.update.message.chat.id})
-      console.log(order.username)
+      console.log('username ', order.username)
       ctx.scene.enter('sceneWizard')
    }
 
