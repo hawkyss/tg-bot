@@ -118,7 +118,11 @@ bot.action(/acceptForm (.+)/, async (ctx) => {
 bot.on('text', async ctx => {
    console.log(ctx.update)
    if (ctx.update.message.text === '✏️ Подать заявку') {
-       const order = await OrderModels.findOne({chatId: ctx.update.message.chat.id})
+      const order = await OrderModels.findOne({
+         where: {
+            chatId: ctx.update.message.chat.id
+         }
+      })
       console.log('username ', order.username)
       ctx.scene.enter('sceneWizard')
    }
