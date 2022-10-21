@@ -2,6 +2,7 @@ const { Telegraf, session, Scenes, Composer } = require('telegraf');
 require('dotenv').config();
 const { Keyboard, Key } = require('telegram-keyboard')
 const bot = new Telegraf(process.env.BOT_TOKEN);
+const sequelize = require('./database')
 bot.use(session())
 
 const mainKeyboard = Keyboard.make([
@@ -9,7 +10,14 @@ const mainKeyboard = Keyboard.make([
    ['❓ Кратко о нас', '💬 Обратная связь'],
  ]).reply()
 
-bot.start((ctx) => {
+bot.start(async (ctx) => {
+   try {
+      await sequelize.authenticate();
+      await sequelize.sync();
+   } catch (e) {
+      console.log('Error with db connection, ' + e)
+   }
+
    ctx.reply('Приветствую тебя в нашем боте! Меню ниже 👇', mainKeyboard)
 });
 
@@ -59,7 +67,7 @@ stepEnd.on('text', async (ctx) => {
    await ctx.reply('Спасибо. Твоя заявка принята, ожидай 🕗', mainKeyboard)
    const formAdmin = Keyboard.make([
       Key.callback('✔️ Принять', `acceptForm ${ctx.session.chatId} ${ctx.session.username}`),
-      Key.callback('❌ Отклонить', `deniedForm ${ctx.session.chatId}`),
+      Key.callback('❌ Отклонить', `deniedForm ${ctx.session.chatId} ${ctx.session.username}`),
     ]).inline()
    await ctx.telegram.sendMessage(5444502388, `
 📩 Новая заявка в тиму!
@@ -85,6 +93,13 @@ bot.action(/acceptForm (.+)/, async (ctx) => {
    const [chatId, username] = params.split(' ')
    await ctx.scene.enter('sceneAcceptForm', {chatId, username})
    await ctx.reply('🔗 Ссылка для воркера:')
+ })
+
+ bot.action(/deniedForm (.+)/, async (ctx) => {
+   let params = ctx.match[1]
+   const [chatId, username] = params.split(' ')
+   await ctx.reply(`❌ Заявка пользователя ${username} - отклонена`)
+   await ctx.telegram.sendMessage(chatId, '❌ К сожалению, ваша заявка была отклонена(', {disable_web_page_preview: true})
  })
 
 
