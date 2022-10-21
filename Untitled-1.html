@@ -1,0 +1,914 @@
+<script>
+   window.addEventListener('DOMContentLoaded', (event) => {
+   document.querySelectorAll('.product-item-image').forEach(item => item.remove())
+   document.querySelector('.header-search.js-header-search').remove()
+document.querySelector('.wrapper.clearfix').insertAdjacentHTML('beforeend', `
+   <div class="header__mob-btn"><span></span><span></span><span></span></div>
+   `)
+document.querySelector('.header__mob-btn').addEventListener('click', e => {
+      document.querySelector('.header-nav').classList.add('active')
+   })
+document.querySelector('head').insertAdjacentHTML('afterbegin', `<meta name="viewport" content="width=device-width, initial-scale=1" />`)
+if (document.querySelector('.product-large-content.idesc ds')) {
+      document.querySelector('.product-large-content.idesc ds').remove()
+   }
+document.querySelector('.header-nav').insertAdjacentHTML('afterbegin', `
+   <span class="close-menu">&times;</span>
+   `)
+document.querySelector('.close-menu').addEventListener('click', e => {
+      document.querySelector('.header-nav').classList.remove('active')
+   })
+       document.querySelector('.header-bottom').innerHTML = `
+   <h1>Надежные ротационные серверные IPv6 прокси</h1>
+   <span>Ротация на каждый запрос, отличная скорость, безлимитный трафик, подсети ISP класса</span>
+   `
+   document.querySelector('.header-bottom').insertAdjacentHTML('afterend',`
+<div class="wrapper">
+<div class="top__menu">
+   <a href="/page/faq" class="top__menu-link">
+      <div class="top__menu-image">
+         <img src="https://imgurcache.lequeshop.ee/s03Dk23.png" alt="icon" class="top__menu-img">
+      </div>
+      <span class="top__menu-text">FAQ</span>
+   </a>
+   <a href="https://t.me/asaproxy_support" class="top__menu-link">
+      <div class="top__menu-image">
+         <img src="https://imgurcache.lequeshop.ee/TklGXJw.png" alt="icon" class="top__menu-img">
+      </div>
+      <span class="top__menu-text">Тех. поддержка</span>
+   </a>
+   <a href="https://blog.asaproxy.com/" class="top__menu-link">
+      <div class="top__menu-image">
+         <img src="https://imgurcache.lequeshop.ee/BtATMjh.png" alt="icon" class="top__menu-img">
+      </div>
+      <span class="top__menu-text">Блог</span>
+   </a>
+</div>
+<a href="/page/polzovatelskoe-soglashenie" class="top__menu-terms">Пользовательское соглашение</a>
+</div>
+<style>
+.product-item-button-buy.cart {
+  display: none;
+}
+.modal-title {
+font-size: 22px;
+color: #093bb9;
+text-transform: uppercase;
+font-weight: 700;
+}
+.formcomposer {
+margin-top: 15px;
+display: block;
+}
+.formcomposer td {
+   color: #093bb9;
+   font-size: 18px;
+}
+.formcomposer td input {
+box-sizing: border-box;
+   border: 2px solid #093bb9;
+    border-radius: 10px;
+    color: #093bb9;
+padding: 10px 15px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    outline-color: #1b9cfc;
+    width: 100%;
+height: auto;
+}
+
+.formcomposer td input::placeholder {
+   font-weight: 600;
+   color: #1b9cfc;
+   opacity: .8;
+}
+.close-menu {
+   display: none;
+}
+.product-custom-link {
+       padding: 7px 12px;
+    border-radius: 10px;
+    border: 2px solid #093bb9;
+    font-size: 16px;
+    text-decoration: none;
+    color: #093bb9 !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    display: block;
+    width: fit-content;
+    margin: 15px auto 0px;
+}
+
+.product-custom-link::after {
+   content: '';
+   position: absolute;
+   left: -40px;
+   top: 0;
+   width: 0%;
+   height: 200px;
+   background-color: #1b9cfc;
+   transform: skew(15deg);
+   transition: .5s;
+   z-index: -1;
+}
+
+.product-custom-link:hover::after {
+   width: 200%;
+}
+
+.product-custom-link span {
+   position: relative;
+   z-index: 3;
+   transition: .3s;
+}
+.product-custom-link:hover {
+text-decoration: none;
+}
+
+.product-custom-link:hover span {
+   color: #fff;
+}
+.wrapper{
+      padding-left: 10px;
+      padding-right: 10px;
+    box-sizing: border-box;
+   }
+.header-bottom {
+      padding-left: 10px;
+      padding-right: 10px;
+   }
+.wrap {
+            min-width: auto;
+   }
+.footer-copyright {
+font-size: 16px;
+}
+.footer-desc {
+      display: flex !important;
+justify-content: center;
+      color: #fff;
+      font-size: 18px;
+   }
+   .footer-desc .clr-orange {
+      color: #1b9cfc;
+   }
+.product-large-button-buy {
+      font-size: 17px;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: #093bb9;
+      transition: .3s;
+   }
+   .product-large-button-buy:hover {
+      background: #1b9cfc;
+   }
+.product-large-content.idesc {
+      font-size: 18px;
+   }
+.product-large-content-title {
+      font-size: 28px;
+      color: #093bb9;
+   }
+.product-large-for-pcs {
+      font-size: 18px;
+      color: #1b9cfc;
+      font-weight: 700;
+   }
+   .product-large-value {
+      font-size: 16px;
+      background-color: #1b9cfc;
+      color: #fff;
+   }
+.product-large-title h1 {
+      color: #093bb9;
+      font-size: 32px;
+   }
+.breadcrumbs {
+      font-size: 16px;
+   }
+.breadcrumbs li a {
+      color: #1b9cfc;
+      transition: .3s;
+   }
+   .breadcrumbs li a:hover {
+      text-decoration: none;
+      color: #093bb9;
+   }
+   .breadcrumbs li {
+      color: #093bb9;
+   }
+   .breadcrumbs li:after {
+      color: #1b9cfc;
+   }
+.header-search-toggler.js-btn-header-search {
+      background: #093bb9;
+      border: 2px solid #093bb9;
+      color: #093bb9;
+      transition: .3;
+      box-shadow: none;
+   } 
+
+   .header-search-toggler.js-btn-header-search:hover {
+      transform: scale(1.1);
+      box-shadow: none;
+   }
+.header-nav-list a{
+      color: #093bb9;
+      background: none;
+      position: relative;
+      font-size: 20px;
+   }
+
+.header-nav-list a:hover {
+   color: #1b9cfc;
+   background: none;
+box-shadow: none;
+}
+
+.product-item-button-buy {
+      font-size: 17px;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: #093bb9;
+      transition: .3s;
+   }
+   .product-item-button-buy:hover {
+      background: #1b9cfc;
+   }
+.product-item-value {
+      font-size: 15px;
+      background-color: #1b9cfc;
+      color: #fff;
+   }
+   .product-item-for-pcs {
+      font-size: 18px;
+      color: #093bb9;
+      margin-left: 30px;
+   }
+.product-item-title {
+      color: #093bb9;
+      font-weight: 700;
+      font-size: 20px;
+   }
+.product-heads {
+      background: #1b9cfc;
+      box-shadow: none;
+   }
+.main-category-list a {
+      color: #1b9cfc;
+      padding: 0px 10px;
+      background: transparent;
+      border: 2px solid #1b9cfc;
+      transition: .3s;
+   }
+   .main-category-list a:hover {
+      background: #1b9cfc;
+      color: #fff;
+   }
+.main-category-list a:hover {
+background: #1b9cfc!important;
+}
+   .top__menu {
+      box-sizing: border-box;
+      margin-bottom: 20px;
+   }
+   .top__menu-link {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      border: 2px solid #093bb9;
+      border-radius: 15px;
+      overflow: hidden;
+      text-decoration: none;
+      width: 100%;
+      transition: .3s;
+   }
+   .top__menu-image {
+      box-sizing: border-box;
+      background-color: #1b9cfc;
+      justify-content: center;
+      position: relative;
+      padding: 15px;
+   }
+   .top__menu-image::after {
+      background-color: #093bb9;
+      bottom: 0;
+      content: "";
+      height: 100%;
+      position: absolute;
+      right: 0;
+      width: 2px;
+   }
+   .top__menu-img {
+      box-sizing: border-box;
+      max-width: 50px;
+   }
+
+   .top__menu-text {
+      box-sizing: border-box;
+      color: #093bb9;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: .3s;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0px 15px;
+text-align: center;
+   }
+   .top__menu-text:hover {
+      background-color: #093bb9;
+      color: #fff;
+   }
+   .top__menu {
+      display: grid;
+      grid-column-gap: 40px;
+      grid-template-columns: 1fr 1.3fr 1fr;
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto 20px;
+   }
+
+   .top__menu-link:hover {
+      transform: translateY(-10px);
+      text-decoration: none;
+   }
+
+   .top__menu-terms {
+      box-sizing: border-box;
+      padding: 15px;
+      border: 2px solid #093bb9;
+      font-size: 18px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 1120px;
+      margin: 0 auto 30px;
+      color: #1b9cfc !important;
+      display: block;
+      width: 100%;
+      transition: .3s;
+      font-weight: 700;
+   }
+
+   .top__menu-terms:hover {
+      color: #093bb9 !important;
+      text-decoration: none;
+   }
+
+   .top__menu-terms:visited {
+      color: #1b9cfc;
+   }
+.header__mob-btn {
+   display: none;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 40px;
+   height: 30px;
+   cursor: pointer;
+   align-items: flex-end;
+   margin-left: 20px;
+}
+
+.header__mob-btn:hover span {
+   background-color: #093bb9;
+}
+
+.header__mob-btn span {
+   background-color: #1b9cfc;
+   height: 4px;
+   width: 100%;
+   border-radius: 10px;
+   transition: .3s;
+}
+
+.header__mob-btn span:nth-child(2) {
+   width: 30px;
+}
+
+
+ @media (max-width: 1060px) {
+      .top__menu {
+         grid-column-gap: 15px;
+      }
+      .product-item-title {
+         font-size: 18px;
+      }
+   }
+
+   @media (max-width: 990px) {
+.close-menu{
+   position: absolute;
+   right: 20px;
+   top: 20px;
+   font-size: 36px;
+   color: #093bb9;;
+   cursor: pointer;
+}
+.wrapper.clearfix {
+display: flex;
+align-items: center;
+}
+.header__mob-btn {
+      display: flex;
+margin-left: auto;
+   }
+      .top__menu {
+         grid-template-columns: 1fr;
+         grid-row-gap: 20px;
+         justify-items: center;
+      }
+      .top__menu-link {
+         max-width: 450px;
+         width: 100%;
+      }
+      .top__menu-terms {
+         max-width: 450px;
+         width: 100%;
+      }
+      .createCart .header-bottom span {
+         font-size: 20px;
+      }
+      .createCart .header-bottom h1 {
+         font-size: 32px;
+      }
+      .main-category-list > li {
+         width: 120px;
+      }
+      .product-item {
+         display: flex;
+         flex-direction: row-reverse;
+         flex-wrap: wrap;
+         justify-content: center;
+      }
+      .product-item-title {
+         text-align: center;
+         margin-bottom: 10px;
+         width: 100%;
+         order: -1;
+      }
+      .product-item-for-pcs {
+         margin-left: 10px;
+      }
+.header-nav {
+         position: fixed !important;
+         right: 0;
+         top: 0 !important;
+         height: 100%;
+         max-width: 320px;
+         width: 100%;
+         background-color: #fff;
+         box-shadow: 0 1.5625rem 2.8125rem rgb(30 30 42 / 8%);
+         transform: translateY(0%) translateX(150%) !important;
+transition: .3s;
+z-index: 999;
+      }
+.header-nav.active {
+transform: translateY(0%) translateX(0%) !important;
+}
+      .header-nav-list {
+         display: flex;
+         height: 100%;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+      }
+
+      .header-nav-list li {
+         border-bottom: 2px solid #1b9cfc;
+         width: 100%;
+padding: 20px 0px;
+      }
+
+      .header-nav a {
+         height: auto;
+      }
+.close-menu {
+ display: block;
+}
+   }
+@media (max-width: 900px) {
+.product-large-title {
+text-align: center;
+margin: 0px;
+}
+      .product-large-left {
+         float: none;
+         width: auto;
+         margin: 0;
+margin-bottom: 30px;
+      }
+      .product-large-button {
+         display: flex;
+         justify-content: center;
+      }
+      .product-large-button-buy {
+         margin: 0;
+      }
+      .product-large-button .product-item-button-buy {
+         order: 1;
+      }
+   }
+@media (max-width: 740px) {
+      .footer-wrap .wrapper {
+         display: flex;
+         flex-direction: column;
+    align-items: center;
+      }
+      .footer-copyright {
+         margin-bottom: 20px;
+      }
+   }
+@media (max-width: 768px) {
+      .product-large-content.idesc {
+         font-size: 16px;
+      }
+   }
+@media (max-width: 660px) {
+      .content-block-ins.type-main {
+         padding: 22px 16px;
+      }
+   }
+ @media (max-width: 630px) {
+      .content-block-ins {
+         padding: 22px 15px;
+      }
+   }
+@media (max-width: 600px) {
+      .product-item .product-item-for-pcs {
+         display: none;
+      }
+.formcomposer tr {
+display: block;
+margin-bottom: 20px;
+}
+.formcomposer tr td {
+   display:block;
+   box-sizing:border-box;
+   clear:both;
+}
+.formcomposer tr td:first-child {
+margin-bottom: 10px;
+} 
+.product-large-title h1 {
+font-size: 25px;
+}
+   }
+ @media (max-width: 540px) {
+      .product-large-content-title {
+         font-size: 24px;
+      }
+   }
+   @media (max-width: 530px) {
+      .createCart .header-bottom h1 {
+         font-size: 28px;
+      }
+      .createCart .header-bottom span {
+         font-size: 18px;
+      }
+.top__menu-terms {
+         font-size: 16px;
+      }
+   }
+@media (max-width: 460px) {
+      .product-item-button {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         order: 2;
+margin-top: 15px;
+      }
+   }
+@media (max-width: 390px) {
+   .header__mob-btn {
+      width: 30px;
+      height: 20px;
+   }
+
+   .header__mob-btn span {
+      background-color: #1b9cfc;
+      height: 3px;
+   }
+   
+   .header__mob-btn span:nth-child(2) {
+      width: 22px;
+   }
+}
+</style>
+`)
+document.querySelector('.header-contacts').style.display = 'none'
+document.querySelector('.footer-desc .clr-orange').innerHTML = 'ASAproxy'
+document.querySelector('.lequecontact-trigger-animate').classList.remove('lequecontact-trigger-animate')
+   });
+window.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelector('img[src="/assets/images/btc.png"]').closest('button').innerHTML = `
+      <style>
+      .coins-ticker__item {
+         flex-shrink: 0;
+         margin: 0 10px;
+         text-align: center;
+         width: 100px;
+      }
+
+      .ticker__row {
+         width: var(--width);
+         -webkit-animation: ticker var(--duration) var(--direction) linear infinite paused;
+         animation: ticker var(--duration) var(--direction) linear infinite paused;
+         display: flex;
+         flex-shrink: 0;
+         -webkit-animation-play-state: running;
+         animation-play-state: running;
+      }
+
+      .coins-ticker {
+         -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+         mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+         margin: 15px auto;
+         max-width: 1040px;
+         display: flex;
+      }
+
+.coins-ticker__item-title {
+         font-size: 16px;
+text-transform: capitalize;
+color: #1b9cfc;
+      }
+.pay_btns #setEmailButton {
+   background-color: transparent;
+   border: 2px solid #093bb9;
+margin-bottom: 10px;
+}
+
+.pay_btns #setEmailButton:last-child {
+margin-bottom: 0px;
+}
+      @keyframes ticker {
+         0% {
+            transform: translateZ(0);
+         }
+
+         to {
+            transform: translate3d(-100%, 0, 0);
+         }
+      }
+   </style>
+      <div class="coins-ticker ticker is-ready" data-controller="ticker" style="--duration: 51s; --direction: normal;">
+         <!-- row-->
+         <div class="ticker__row" data-ticker-target="row" style="--width: 2040px;">
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/btc.svg" alt="Bitcoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Bitcoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/eth.svg" alt="Ethereum"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Ethereum</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/ltc.svg" alt="Litecoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Litecoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/zec.svg" alt="Zcash" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">Zcash</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/doge.svg" alt="Dogecoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Dogecoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/dash.svg" alt="DASH" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">DASH</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/xmr.svg" alt="Monero"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Monero</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/usdt.svg" alt="USDT" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">USDT</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/bch.svg" alt="Bitcoin Cash"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Bitcoin Cash</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/usdc.svg" alt="USD Coin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">USD Coin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/tusd.svg" alt="TrueUSD"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">TrueUSD</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/shib.svg" alt="Shiba Inu"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Shiba Inu</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/btt.svg" alt="BitTorrent"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">BitTorrent</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/tron.svg" alt="Tron" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">Tron</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/bnb.svg" alt="Binance Coin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Binance Coin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/busd.svg" alt="Binance USD"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Binance USD</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/etc.svg" alt="Ethereum Classic"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">ETH Classic</div>
+            </div>
+         </div>
+         <div class="ticker__row" data-ticker-target="row" style="--width: 2040px;">
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/btc.svg" alt="Bitcoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Bitcoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/eth.svg" alt="Ethereum"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Ethereum</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/ltc.svg" alt="Litecoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Litecoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/zec.svg" alt="Zcash" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">Zcash</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/doge.svg" alt="Dogecoin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Dogecoin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/dash.svg" alt="DASH" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">DASH</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/xmr.svg" alt="Monero"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Monero</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/usdt.svg" alt="USDT" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">USDT</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/bch.svg" alt="Bitcoin Cash"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Bitcoin Cash</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/usdc.svg" alt="USD Coin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">USD Coin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/tusd.svg" alt="TrueUSD"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">TrueUSD</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/shib.svg" alt="Shiba Inu"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Shiba Inu</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/btt.svg" alt="BitTorrent"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">BitTorrent</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/tron.svg" alt="Tron" width="80"
+                  height="82" loading="eager">
+               <div class="coins-ticker__item-title">Tron</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/bnb.svg" alt="Binance Coin"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Binance Coin</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/busd.svg" alt="Binance USD"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Binance USD</div>
+            </div>
+            <!-- item-->
+            <div class="coins-ticker__item">
+               <img class="coins-ticker__item-icon" src="https://plisio.net/v2/images/coins/etc.svg" alt="Ethereum Classic"
+                  width="80" height="82" loading="eager">
+               <div class="coins-ticker__item-title">Ethereum Classic</div>
+            </div>
+         </div>
+      </div>
+      `
+for (const td of document.querySelectorAll("tr")) {
+      if (td.textContent.includes("Купон (если есть):")) {
+         td.closest('tr').style.display = 'none'
+      }  
+   }
+   });
+   </script>
+
+   <style>
+      .price__inner {
+         display: grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         grid-gap: 40px;
+      }
+
+      .price__inner {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+      }
+      
+      .tcp {
+         padding: 15px 30px;
+         font-size: 24px;
+
+      }
+
+      .price {
+         padding: 15px 30px;
+         font-size: 24px;
+      }
+   </style>
+
+   <div class="price__inner">
+      <div class="price__item">
+         <span class="tcp">
+            500 TCP
+         </span>
+         <span class="price">
+            2500 ₽
+         </span>
+      </div>
+   </div>
